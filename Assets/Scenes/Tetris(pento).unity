@@ -533,7 +533,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 850804215}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: OnRestartButton
+        m_MethodName: OnRestartButton2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -605,6 +605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338b027a8b499ba439eac7633529ce82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreThreshold: 100
+  speedIncreaseFactor: 0.8
   tetrominoes: []
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
@@ -1249,6 +1251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338b027a8b499ba439eac7633529ce82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreThreshold: 100
+  speedIncreaseFactor: 0.8
   tetrominoes: []
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
@@ -1548,6 +1552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338b027a8b499ba439eac7633529ce82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreThreshold: 100
+  speedIncreaseFactor: 0.8
   tetrominoes: []
   boardSize: {x: 10, y: 20}
   spawnPosition: {x: -1, y: 8, z: 0}
@@ -1847,23 +1853,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338b027a8b499ba439eac7633529ce82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreThreshold: 10000
+  speedIncreaseFactor: 0.8
   tetrominoes:
-  - tile: {fileID: 11400000, guid: 4c43a9d5352295f4c9698ad47a3c3f9f, type: 2}
-    tetromino: 0
-  - tile: {fileID: 11400000, guid: 44380c7800d534b44b5af5ec1d9a762d, type: 2}
-    tetromino: 1
-  - tile: {fileID: 11400000, guid: a65cd153df7bc1e4880138eddb051d73, type: 2}
-    tetromino: 2
-  - tile: {fileID: 11400000, guid: 01e5ea2dc2e85c4458d9295cb32471cf, type: 2}
-    tetromino: 3
-  - tile: {fileID: 11400000, guid: 4aa7f249e189238489084745af2ef53f, type: 2}
-    tetromino: 4
-  - tile: {fileID: 11400000, guid: 86fefa7071079474485d0575a85cfe8e, type: 2}
-    tetromino: 5
   - tile: {fileID: 11400000, guid: f29920475fa155649883ef77033cff43, type: 2}
-    tetromino: 6
+    tetromino: 7
+  - tile: {fileID: 11400000, guid: 01e5ea2dc2e85c4458d9295cb32471cf, type: 2}
+    tetromino: 8
+  - tile: {fileID: 11400000, guid: 01e5ea2dc2e85c4458d9295cb32471cf, type: 2}
+    tetromino: 9
+  - tile: {fileID: 11400000, guid: 4c43a9d5352295f4c9698ad47a3c3f9f, type: 2}
+    tetromino: 10
+  - tile: {fileID: 11400000, guid: 6c26bb4bdcf1dc643b7794d8ed88153d, type: 2}
+    tetromino: 11
+  - tile: {fileID: 11400000, guid: 6c26bb4bdcf1dc643b7794d8ed88153d, type: 2}
+    tetromino: 12
+  - tile: {fileID: 11400000, guid: a65cd153df7bc1e4880138eddb051d73, type: 2}
+    tetromino: 13
+  - tile: {fileID: 11400000, guid: a65cd153df7bc1e4880138eddb051d73, type: 2}
+    tetromino: 14
+  - tile: {fileID: 11400000, guid: 4aa7f249e189238489084745af2ef53f, type: 2}
+    tetromino: 15
+  - tile: {fileID: 11400000, guid: a65cd153df7bc1e4880138eddb051d73, type: 2}
+    tetromino: 16
+  - tile: {fileID: 11400000, guid: 4aa7f249e189238489084745af2ef53f, type: 2}
+    tetromino: 17
+  - tile: {fileID: 11400000, guid: 4aa7f249e189238489084745af2ef53f, type: 2}
+    tetromino: 18
+  - tile: {fileID: 11400000, guid: 44380c7800d534b44b5af5ec1d9a762d, type: 2}
+    tetromino: 19
+  - tile: {fileID: 11400000, guid: 44380c7800d534b44b5af5ec1d9a762d, type: 2}
+    tetromino: 20
+  - tile: {fileID: 11400000, guid: 86fefa7071079474485d0575a85cfe8e, type: 2}
+    tetromino: 21
+  - tile: {fileID: 11400000, guid: 86fefa7071079474485d0575a85cfe8e, type: 2}
+    tetromino: 22
+  - tile: {fileID: 11400000, guid: 6c26bb4bdcf1dc643b7794d8ed88153d, type: 2}
+    tetromino: 23
+  - tile: {fileID: 11400000, guid: 6c26bb4bdcf1dc643b7794d8ed88153d, type: 2}
+    tetromino: 24
   boardSize: {x: 10, y: 20}
-  spawnPosition: {x: -1, y: 8, z: 0}
+  spawnPosition: {x: -1, y: 9, z: 0}
   GameOverScreen: {fileID: 1273244595}
   scoreManager: {fileID: 1879240019}
   points: 0
@@ -1882,6 +1912,7 @@ MonoBehaviour:
   stepDelay: 1
   moveDelay: 0.1
   lockDelay: 0.5
+  scoreThreshold: 10000
 --- !u!114 &1907066902
 MonoBehaviour:
   m_ObjectHideFlags: 0

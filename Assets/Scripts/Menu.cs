@@ -9,9 +9,20 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
     
+    public void OnPentominoButton()
+    {
+        
+        SceneManager.LoadScene(2);
+    }
+    
     public void OnRestartButton()
     {
         SceneManager.LoadScene(1);
+    }
+    
+    public void OnRestartButton2()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void OnQuitButton()
@@ -23,4 +34,5 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    
 }

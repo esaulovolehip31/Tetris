@@ -36,6 +36,12 @@ public class Ghost : MonoBehaviour
 
     private void Copy()
     {
+        if (trackingPiece == null || trackingPiece.cells == null)
+        {
+            Debug.LogError("trackingPiece or trackingPiece.cells is null in Ghost.Copy");
+            return;
+        }
+        
         for (int i = 0; i < cells.Length; i++) {
             cells[i] = trackingPiece.cells[i];
         }

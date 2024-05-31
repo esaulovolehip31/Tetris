@@ -3,7 +3,8 @@ using UnityEngine.Tilemaps;
 
 public enum Tetromino
 {
-    I, J, L, O, S, T, Z
+    I, J, L, O, S, T, Z, 
+    Ip, Lp, Jp, Tp, Sp, Zp, Bird1, Bird2, P, RevP, Worm1, Worm2, Cup, Angle, Stairs, Plus, Zombie1, Zombie2 // pentomino
 }
 
 [System.Serializable]
