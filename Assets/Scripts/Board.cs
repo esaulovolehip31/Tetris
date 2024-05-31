@@ -7,13 +7,15 @@ public class Board : MonoBehaviour
     public Piece activePiece { get; private set; }
     public int scoreThreshold = 100;
     public float speedIncreaseFactor = 0.8f;
-
     public TetrominoData[] tetrominoes;
     public Vector2Int boardSize = new Vector2Int(10, 20);
     public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
     public GameOver GameOverScreen;
     public ScoreManager scoreManager;
     public int points;
+    public NextPieceDisplay nextPieceDisplay;
+    
+    private TetrominoData nextPieceData;
 
     public RectInt Bounds
     {
@@ -44,13 +46,14 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
+        SetNextPiece();
         SpawnPiece();
     }
 
     public void SpawnPiece()
     {
-        int random = Random.Range(0, tetrominoes.Length);
-        TetrominoData data = tetrominoes[random];
+        TetrominoData data = nextPieceData;  
+        SetNextPiece();  
 
         activePiece.Initialize(this, spawnPosition, data);
 
@@ -61,6 +64,17 @@ public class Board : MonoBehaviour
         else
         {
             GameOver();
+        }
+    }
+    
+    private void SetNextPiece()
+    {
+        int random = Random.Range(0, tetrominoes.Length);
+        nextPieceData = tetrominoes[random];
+
+        if (nextPieceDisplay != null)
+        {
+            nextPieceDisplay.UpdateNextPiece(nextPieceData);
         }
     }
 

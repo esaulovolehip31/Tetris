@@ -59,7 +59,6 @@ public static class Data
         { Tetromino.S, WallKicksJLOSTZ },
         { Tetromino.T, WallKicksJLOSTZ },
         { Tetromino.Z, WallKicksJLOSTZ },
-        // Removed duplicate Tetromino.Ip and combined it with WallKicksI or WallKicksJLOSTZ depending on desired behavior
         { Tetromino.Ip, WallKicksI }, 
         { Tetromino.Lp, WallKicksJLOSTZ },
         { Tetromino.Jp, WallKicksJLOSTZ },

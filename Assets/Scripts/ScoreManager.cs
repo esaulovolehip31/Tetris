@@ -11,16 +11,14 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        // Load the high score from PlayerPrefs
         highscore = PlayerPrefs.GetInt("Highscore", 0);
-        UpdateScore(0); // Initialize score display
+        UpdateScore(0);
     }
 
     public void UpdateScore(int newScore)
     {
         score = newScore;
-
-        // Ensure Text components are assigned before updating text
+        
         if (scoreText != null)
         {
             scoreText.text = score.ToString() + " Points";
@@ -43,7 +41,7 @@ public class ScoreManager : MonoBehaviour
         {
             highscore = score;
             PlayerPrefs.SetInt("Highscore", highscore);
-            PlayerPrefs.Save(); // Ensure the high score is saved
+            PlayerPrefs.Save();
         }
     }
 }
