@@ -10,7 +10,8 @@ public class Board : MonoBehaviour
     public Vector2Int boardSize = new Vector2Int(10, 20);
     public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
     public GameOver GameOverScreen;
-    public int points = 0;
+    public ScoreManager scoreManager;
+    public int points;
     public RectInt Bounds {
         get
         {
@@ -23,6 +24,7 @@ public class Board : MonoBehaviour
     {
         tilemap = GetComponentInChildren<Tilemap>();
         activePiece = GetComponentInChildren<Piece>();
+        scoreManager = FindObjectOfType<ScoreManager>(); //....................
 
         for (int i = 0; i < tetrominoes.Length; i++) {
             tetrominoes[i].Initialize();
@@ -52,8 +54,7 @@ public class Board : MonoBehaviour
     public void GameOver()
     {
       
-        GameOverScreen.Setup(points);
-        // Можливо, вам потрібно зупинити гру або зробити інші дії, наприклад:
+        GameOverScreen.Setup();
         enabled = false; // Зупинити оновлення Board
         activePiece.enabled = false; // Зупинити оновлення activePiece
         
@@ -105,20 +106,38 @@ public class Board : MonoBehaviour
     {
         RectInt bounds = Bounds;
         int row = bounds.yMin;
+        int line = 0;
 
-        // Clear from bottom to top
         while (row < bounds.yMax)
         {
-            // Only advance to the next row if the current is not cleared
-            // because the tiles above will fall down when a row is cleared
             if (IsLineFull(row)) {
                 LineClear(row);
+                line += 1;
             } else {
                 row++;
             }
-            // if row = 1 then points = ...
+        }
+
+        if (line > 0)
+        {
+            int pointsEarned = CalculatePoints(line);
+            points += pointsEarned;
+            scoreManager.UpdateScore(points);  // Виклик UpdateScore замість Update
         }
     }
+
+    private int CalculatePoints(int line)
+    {
+        switch (line)
+        {
+            case 1: return 100;
+            case 2: return 300;
+            case 3: return 700;
+            case 4: return 1500;
+            default: return 0;
+        }
+    }
+
 
     public bool IsLineFull(int row)
     {

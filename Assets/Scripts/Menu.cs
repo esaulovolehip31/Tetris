@@ -5,6 +5,12 @@ public class Menu : MonoBehaviour
 {
     public void OnTetrominoButton()
     {
+        
+        SceneManager.LoadScene(1);
+    }
+    
+    public void OnRestartButton()
+    {
         SceneManager.LoadScene(1);
     }
 
