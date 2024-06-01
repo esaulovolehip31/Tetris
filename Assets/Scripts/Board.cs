@@ -152,7 +152,7 @@ public class Board : MonoBehaviour
 
             if (points >= scoreThreshold)
             {
-                scoreThreshold += 100;
+                scoreThreshold += 10000;
                 IncreaseSpeed();
             }
         }
