@@ -3,34 +3,34 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public void OnTetrominoButton()
+    public void OnTetrominoButton() // loading tetromino mode
     {
         
         SceneManager.LoadScene(1);
     }
     
-    public void OnPentominoButton()
+    public void OnPentominoButton() // loading for pentomino mode
     {
         
         SceneManager.LoadScene(2);
     }
     
-    public void OnRestartButton()
+    public void OnRestartButton() //restarting tetromino mode
     {
         SceneManager.LoadScene(1);
     }
     
-    public void OnRestartButton2()
+    public void OnRestartButton2() //restarting pentomino mode
     {
         SceneManager.LoadScene(2);
     }
 
-    public void OnQuitButton()
+    public void OnQuitButton() // quit the game
     {
         Application.Quit();
     }
     
-    public void OnMainMenuButton()
+    public void OnMainMenuButton() // loading main menu
     {
         SceneManager.LoadScene(0);
     }

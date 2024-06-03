@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public Text scoreText;
-    public Text highscoreText;
+    public Text scoreText; //ui text for score
+    public Text highscoreText; //ui text for highscore
 
     private int score = 0;
     private int highscore = 0;
@@ -21,27 +21,21 @@ public class ScoreManager : MonoBehaviour
         
         if (scoreText != null)
         {
-            scoreText.text = score.ToString() + " Points";
+            scoreText.text = score.ToString() + " Points"; //update the score text
         }
-        else
-        {
-            Debug.LogError("Score Text is not assigned.");
-        }
+        
 
         if (highscoreText != null)
         {
             highscoreText.text = "Highscore: " + highscore.ToString();
         }
-        else
-        {
-            Debug.LogError("Highscore Text is not assigned.");
-        }
+        
 
         if (score > highscore)
         {
             highscore = score;
-            PlayerPrefs.SetInt("Highscore", highscore);
-            PlayerPrefs.Save();
+            PlayerPrefs.SetInt("Highscore", highscore); // update the highscore
+            PlayerPrefs.Save();// save highscore
         }
     }
 }

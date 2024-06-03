@@ -4,6 +4,6 @@ public class GameOver : MonoBehaviour
 {
     public void Setup()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(true);//activate game over screen
     }
 }

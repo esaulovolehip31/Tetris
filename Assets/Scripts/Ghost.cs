@@ -8,8 +8,8 @@ public class Ghost : MonoBehaviour
     public Piece trackingPiece;
 
     public Tilemap tilemap { get; private set; }
-    public Vector3Int[] cells { get; private set; }
-    public Vector3Int position { get; private set; }
+    public Vector3Int[] cells { get; private set; } // cells for ghost piece
+    public Vector3Int position { get; private set; } // position of the ghost piece
 
     private void Awake()
     {
@@ -25,12 +25,12 @@ public class Ghost : MonoBehaviour
         Set();
     }
 
-    private void Clear()
+    private void Clear() // clear previous ghost pieces
     {
         for (int i = 0; i < cells.Length; i++)
         {
-            Vector3Int tilePosition = cells[i] + position;
-            tilemap.SetTile(tilePosition, null);
+            Vector3Int tilePosition = cells[i] + position; //calculating tile position
+            tilemap.SetTile(tilePosition, null);// clearing tile at the position
         }
     }
 
@@ -42,7 +42,7 @@ public class Ghost : MonoBehaviour
         }
         
         for (int i = 0; i < trackingPiece.cells.Length; i++) {
-            cells[i] = trackingPiece.cells[i];
+            cells[i] = trackingPiece.cells[i]; // copying cells from tracking piece
         }
     }
 
@@ -51,16 +51,16 @@ public class Ghost : MonoBehaviour
         Vector3Int position = trackingPiece.position;
 
         int current = position.y;
-        int bottom = -mainBoard.boardSize.y / 2 - 1;
+        int bottom = -mainBoard.boardSize.y / 2 - 1; // calculating bottom boundary
 
         mainBoard.Clear(trackingPiece);
 
         for (int row = current; row >= bottom; row--)
         {
-            position.y = row;
+            position.y = row; // moving the ghost piece
 
             if (mainBoard.IsValidPosition(trackingPiece, position)) {
-                this.position = position;
+                this.position = position; // updating position if position of ghost tile is valid
             } else {
                 break;
             }
@@ -74,7 +74,7 @@ public class Ghost : MonoBehaviour
         for (int i = 0; i < cells.Length; i++)
         {
             Vector3Int tilePosition = cells[i] + position;
-            tilemap.SetTile(tilePosition, tile);
+            tilemap.SetTile(tilePosition, tile); //setting tile at the position
         }
     }
 

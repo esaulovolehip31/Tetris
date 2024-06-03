@@ -24,7 +24,7 @@ public class NextPieceDisplay : MonoBehaviour
             int x = cell.x + offset.x;
             int y = cell.y + offset.y;
             
-            int index = y * 5 + x;
+            int index = y * 5 + x; // calculate index of the grid for display manager
             
             if (index >= 0 && index < gridImages.Length)
             {

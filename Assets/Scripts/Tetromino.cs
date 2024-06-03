@@ -3,7 +3,9 @@ using UnityEngine.Tilemaps;
 
 public enum Tetromino
 {
+    //tetrominoes:
     I, J, L, O, S, T, Z, 
+    //pentominoes:
     Ip, Lp, Jp, Tp, Sp, Zp, Bird1, Bird2, P, RevP, Worm1, Worm2, Cup, Angle, Stairs, Plus, Zombie1, Zombie2 // pentomino
 }
 
@@ -18,8 +20,8 @@ public struct TetrominoData
 
     public void Initialize()
     {
-        cells = Data.Cells[tetromino];
-        wallKicks = Data.WallKicks[tetromino];
+        cells = Data.Cells[tetromino]; // initializing cells based on tile type
+        wallKicks = Data.WallKicks[tetromino]; // initializing wallkicks based on tile type
     }
 
 }

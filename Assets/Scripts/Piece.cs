@@ -30,16 +30,16 @@ public class Piece : MonoBehaviour
 
         if (cells == null)
         {
-            cells = new Vector3Int[data.cells.Length];
+            cells = new Vector3Int[data.cells.Length]; // initialize cells array
         }
 
         for (int i = 0; i < cells.Length; i++)
         {
-            cells[i] = (Vector3Int)data.cells[i];
+            cells[i] = (Vector3Int)data.cells[i]; // copy cells from data
         }
     }
 
-    private void Update()
+    private void Update() 
     {
         board.Clear(this);
 
@@ -100,7 +100,7 @@ public class Piece : MonoBehaviour
 
         if (lockTime >= lockDelay)
         {
-            Lock();
+            Lock();// lock the piece in place
         }
     }
 
@@ -108,10 +108,10 @@ public class Piece : MonoBehaviour
     {
         while (Move(Vector2Int.down))
         {
-            continue;
+            continue; // keep moving down until invalid position is reached
         }
 
-        Lock();
+        Lock(); 
     }
 
     private void Lock()
@@ -124,10 +124,10 @@ public class Piece : MonoBehaviour
     private bool Move(Vector2Int translation)
     {
         Vector3Int newPosition = position;
-        newPosition.x += translation.x;
-        newPosition.y += translation.y;
+        newPosition.x += translation.x; //update x position
+        newPosition.y += translation.y; //update y position
 
-        bool valid = board.IsValidPosition(this, newPosition);
+        bool valid = board.IsValidPosition(this, newPosition); // check if position is valid
 
         if (valid)
         {
@@ -206,7 +206,7 @@ public class Piece : MonoBehaviour
 
         if (rotationDirection < 0)
         {
-            wallKickIndex--;
+            wallKickIndex--; // adjust rotation
         }
 
         return Wrap(wallKickIndex, 0, data.wallKicks.GetLength(0));
@@ -216,11 +216,11 @@ public class Piece : MonoBehaviour
     {
         if (input < min)
         {
-            return max - (min - input) % (max - min);
+            return max - (min - input) % (max - min); // wrap around lower bound
         }
         else
         {
-            return min + (input - min) % (max - min);
+            return min + (input - min) % (max - min); // wrap around upper bound
         }
     }
 }

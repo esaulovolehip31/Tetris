@@ -5,7 +5,7 @@ public class Board : MonoBehaviour
 {
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
-    public int scoreThreshold = 100;
+    public int scoreThreshold = 10000; //score threshold for speed increase
     public float speedIncreaseFactor = 0.8f;
     public TetrominoData[] tetrominoes;
     public Vector2Int boardSize = new Vector2Int(10, 20);
@@ -21,68 +21,68 @@ public class Board : MonoBehaviour
     {
         get
         {
-            Vector2Int position = new Vector2Int(-boardSize.x / 2, -boardSize.y / 2);
-            return new RectInt(position, boardSize);
+            Vector2Int position = new Vector2Int(-boardSize.x / 2, -boardSize.y / 2); // calculating bottom left corener
+            return new RectInt(position, boardSize); // return the bounds of the board
         }
     }
 
     private void Awake()
     {
-        tilemap = GetComponentInChildren<Tilemap>();
-        activePiece = GetComponentInChildren<Piece>();
-        scoreManager = FindObjectOfType<ScoreManager>();
+        tilemap = GetComponentInChildren<Tilemap>(); // get tilemap
+        activePiece = GetComponentInChildren<Piece>();// get active piece
+        scoreManager = FindObjectOfType<ScoreManager>(); // find score manager in the scene
 
         for (int i = 0; i < tetrominoes.Length; i++)
         {
-            tetrominoes[i].Initialize();
+            tetrominoes[i].Initialize(); // initializing tiles data
         }
     }
 
     public void IncreaseSpeed()
     {
         activePiece.stepDelay *= speedIncreaseFactor;
-        Debug.Log($"Speed increased. New step delay: {activePiece.stepDelay}");
+        Debug.Log($"Speed increased. New step delay: {activePiece.stepDelay}"); // log the new speed delay
     }
 
     private void Start()
     {
-        SetNextPiece();
-        SpawnPiece();
+        SetNextPiece(); // setting next piece to spawn
+        SpawnPiece(); // spawn the initial piece
     }
 
     public void SpawnPiece()
     {
-        TetrominoData data = nextPieceData;  
-        SetNextPiece();  
+        TetrominoData data = nextPieceData;  // get next piece data
+        SetNextPiece();  //update next piece  data
 
         activePiece.Initialize(this, spawnPosition, data);
 
         if (IsValidPosition(activePiece, spawnPosition))
         {
-            Set(activePiece);
+            Set(activePiece); // set active piece on board
         }
         else
         {
-            GameOver();
+            GameOver(); // end the game if piece is out of bounds
         }
     }
     
     private void SetNextPiece()
     {
-        int random = Random.Range(0, tetrominoes.Length);
-        nextPieceData = tetrominoes[random];
+        int random = Random.Range(0, tetrominoes.Length); // pick random piece
+        nextPieceData = tetrominoes[random]; // update next piece data
 
         if (nextPieceDisplay != null)
         {
-            nextPieceDisplay.UpdateNextPiece(nextPieceData);
+            nextPieceDisplay.UpdateNextPiece(nextPieceData); // show the next piece
         }
     }
 
     public void GameOver()
     {
-        GameOverScreen.Setup();
-        enabled = false;
-        activePiece.enabled = false;
+        GameOverScreen.Setup(); // activate game over screen
+        enabled = false; // disable the board
+        activePiece.enabled = false;// disable the active piece
     }
 
     public void Set(Piece piece)
@@ -105,11 +105,11 @@ public class Board : MonoBehaviour
 
     public bool IsValidPosition(Piece piece, Vector3Int position)
     {
-        RectInt bounds = Bounds;
+        RectInt bounds = Bounds; // get the bounds
 
         for (int i = 0; i < piece.cells.Length; i++)
         {
-            Vector3Int tilePosition = piece.cells[i] + position;
+            Vector3Int tilePosition = piece.cells[i] + position; //calculate tile position
 
             if (!bounds.Contains((Vector2Int)tilePosition))
             {
@@ -128,19 +128,19 @@ public class Board : MonoBehaviour
     public void ClearLines()
     {
         RectInt bounds = Bounds;
-        int row = bounds.yMin;
+        int row = bounds.yMin; // start from the bottom
         int line = 0;
 
         while (row < bounds.yMax)
         {
             if (IsLineFull(row))
             {
-                LineClear(row);
+                LineClear(row); // clear the line
                 line += 1;
             }
             else
             {
-                row++;
+                row++; 
             }
         }
 
@@ -148,7 +148,7 @@ public class Board : MonoBehaviour
         {
             int pointsEarned = CalculatePoints(line);
             points += pointsEarned;
-            scoreManager.UpdateScore(points);
+            scoreManager.UpdateScore(points); // update the score display
 
             if (points >= scoreThreshold)
             {
@@ -205,7 +205,7 @@ public class Board : MonoBehaviour
                 TileBase above = tilemap.GetTile(position);
 
                 position = new Vector3Int(col, row, 0);
-                tilemap.SetTile(position, above);
+                tilemap.SetTile(position, above); // move the row down
             }
 
             row++;
